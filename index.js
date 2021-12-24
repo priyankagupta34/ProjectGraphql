@@ -1,16 +1,21 @@
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer, gql } = require("apollo-server-express");
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
+  schema {
+    query: Query
+  }
+
   type Query {
-    hello: String
+    greeting: String
   }
 `;
-
+console.log("jskk");
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    hello: (root, args, context) => "Hello world!"
+    greeting: (root, args, context) =>
+      "This is Priyanka! You are viewing graphql"
   }
 };
 
@@ -19,6 +24,13 @@ const server = new ApolloServer({
   resolvers
 });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
-});
+server
+  .listen({ port: 4100 })
+  .then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
+  })
+  .catch((err) =>
+    console.log(
+      `Trouble starting server ar port 4100\nMay be this port is already used! Or may be not... check it out`
+    )
+  );
