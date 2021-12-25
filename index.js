@@ -1,36 +1,47 @@
+const fs = require("fs");
+const resolvers = require("./graphqlRL/resolver.js");
 const { ApolloServer, gql } = require("apollo-server-express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const express = require("express");
+const expressJwt = require("express-jwt");
+const jwt = require("jsonwebtoken");
+
+const port = 9000;
+const jwtSecret = Buffer.from("Zn8Q5tyZ/G1MHltc4F/gTkVJMlrbKiZt", "base64");
+
+const app = express();
+
+app.use(
+  cors(),
+  bodyParser.json(),
+  expressJwt({
+    secret: jwtSecret,
+    credentialsRequired: false
+  })
+);
+
+// app.post("/login", (req, res) => {
+//   const { email, password } = req.body;
+//   const user = db.users.list().find((user) => user.email === email);
+//   if (!(user && user.password === password)) {
+//     res.sendStatus(401);
+//     return;
+//   }
+//   const token = jwt.sign({ sub: user.id }, jwtSecret);
+//   res.send({ token });
+// });
 
 // Construct a schema, using GraphQL schema language
-const typeDefs = gql`
-  schema {
-    query: Query
-  }
+/* utf-8 so tht function read this file as string and not binary */
+const typeDefs = gql(
+  fs.readFileSync("./graphqlRL/schema.graphql", { encoding: "utf-8" })
+);
 
-  type Query {
-    greeting: String
-  }
-`;
-console.log("jskk");
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    greeting: (root, args, context) =>
-      "This is Priyanka! You are viewing graphql"
-  }
-};
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers
+const apolloServer = new ApolloServer({ typeDefs, resolvers });
+apolloServer.start().then(() => {
+  console.log("starting ");
+  apolloServer.applyMiddleware({ app, path: "/graphql" });
 });
 
-server
-  .listen({ port: 4100 })
-  .then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`);
-  })
-  .catch((err) =>
-    console.log(
-      `Trouble starting server ar port 4100\nMay be this port is already used! Or may be not... check it out`
-    )
-  );
+app.listen(port, () => console.info(`Server started on port ${port}`));
