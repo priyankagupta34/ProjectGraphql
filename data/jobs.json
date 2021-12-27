@@ -16,5 +16,29 @@
     "companyId": "SJV0-wdOM",
     "title": "Full-Stack Developer",
     "description": "We are looking for a Full-Stack Developer familiar with Node.js, Express, and React."
+  },
+  {
+    "id": "BJzE3RSsF",
+    "companyId": "SJV0-wdOM",
+    "title": "Calculator Developer",
+    "description": "Need someone with experience in Maths and coding"
+  },
+  {
+    "id": "S185hCrit",
+    "companyId": "SJV0-wdOM",
+    "title": "Vok Developer",
+    "description": "Need someone with experience in Vok and coding"
+  },
+  {
+    "id": "BJlJDkLoK",
+    "companyId": "SJV0-wdOM",
+    "title": "Book writer",
+    "description": "need someone who can write complete documents"
+  },
+  {
+    "id": "r1xhGbvsY",
+    "companyId": "HJRa-DOuG",
+    "title": "Clerk",
+    "description": "SHould be able to handle all kind of file delivery."
   }
 ]

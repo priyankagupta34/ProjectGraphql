@@ -44,4 +44,6 @@ apolloServer.start().then(() => {
   apolloServer.applyMiddleware({ app, path: "/graphql" });
 });
 
+console.log("hjksjk");
+
 app.listen(port, () => console.info(`Server started on port ${port}`));

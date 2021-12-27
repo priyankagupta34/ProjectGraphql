@@ -3,13 +3,20 @@ type schema {
 }
 
 type Query {
+  job(id: ID!): Job
   jobs: [Job]
+  company(id: ID!): Company
+}
+
+type Mutation{
+  createJob(companyId: ID, title: String, description: String): ID
 }
 
 type Company{
   id: ID!
   name: String
   description: String
+  jobs: [Job]
 }
 
 type Job{
