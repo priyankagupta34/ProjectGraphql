@@ -40,7 +40,7 @@ const typeDefs = gql(
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 apolloServer.start().then(() => {
-  console.log("starting ");
+  console.log("startinjg ");
   apolloServer.applyMiddleware({ app, path: "/graphql" });
 });
 
